@@ -1,2 +1,50 @@
-# TCI
-Code and synthetic data accompanying the paper “Statistical Learning of Trade Credit Insurance Network Data with Applications to Ratemaking and Reserving”
+# Statistical Learning of Trade Credit Insurance Network Data
+Code and synthetic data accompanying the paper **“Statistical Learning of Trade Credit Insurance Network Data with Applications to Ratemaking and Reserving.”**
+
+## Directories
+
+### `code`
+The `code` directory contains all scripts needed to prepare the TCI data, fit the network-augmented GLM/GLMM, quantify parameter uncertainty, and evaluate in-sample and out-of-sample performance. It includes:
+
+1. **data_prepare.R**  
+   Computes first- and second-order degree centralities (DC) from the cleaned TCI claims dataset and appends them as covariates. Outputs the restructured matrices and vectors required for model fitting and analysis.
+
+2. **main_function.R**  
+   Core routines to fit the network-augmented GLMM to the TCI data and perform post-fitting analysis.
+
+3. **fit_GLMM.R**  
+   Fits the network-augmented GLMM to the restructured TCI data. Saves per-iteration parameter lists as **fit_GLMM.Rda** (with DC variables) or **fit_GLMMb.Rda** (without DC variables).  
+   *Note:* The uploaded **fit_GLMM.Rda** and **fit_GLMMb.Rda** reflect fits on the real TCI dataset, not the synthetic dataset.
+
+4. **fit_GLMM_ucty.R**  
+   Computes standard errors for GLMM parameters via a parametric bootstrap.
+
+5. **fit_GLMM_post.R**  
+   Computes posterior buyer, seller, and policy random effects and the in-sample observed log-likelihood from the fitted model.
+
+6. **fit_analysis.R**  
+   Assesses fitted-model performance by computing/visualizing ADEV, reserves, reporting-delay distributions, posterior classifications, and trade-connection correlations.
+
+7. **main_function_GLM.R**  
+   Core routines to fit the network-augmented GLM and perform post-fitting analysis.
+
+8. **fit_GLM.R**  
+   Fits the network-augmented GLM to the restructured TCI data and evaluates performance. Saves per-iteration parameter lists as **fit_GLM.Rda** (with DC variables) or **fit_GLMb.Rda** (without DC variables).  
+   *Note:* The uploaded **fit_GLM.Rda** and **fit_GLMb.Rda** reflect fits on the real TCI dataset, not the synthetic dataset.
+
+9. **fit_GLM_ucty.R**  
+   Computes standard errors for GLM parameters via a parametric bootstrap.
+
+### `data (synthetic)`
+The `data (synthetic)` directory provides a synthetic TCI dataset with 250,000 trade connections. It preserves the schema (column names) of the cleaned real TCI data and loosely mimics selected summary characteristics. The synthetic data are generated entirely independently and contain no records from the real dataset, thereby avoiding any disclosure of business-sensitive information.  
+Because the authors are bound by a non-disclosure agreement (NDA), the actual TCI data cannot be publicly released. The synthetic dataset is intended to help readers understand the data structure and to run the provided code end-to-end.
+
+This directory contains:
+
+1. **data_synthetic.Rda**  
+   Synthetic TCI dataset with columns including:  
+   - **start_date**: Policy start date (each policy lasts one year).  
+   - **claim_date**: Claim date when a claim occurs; **NA** otherwise.  
+   - **id.b**, **id.s**, **id.p**: Buyer, seller, and policy numerical identifiers for each trade connection.  
+   - **z**: Claim indicator (1 if a claim occurs, 0 otherwise).  
+   - Additional buyer-, seller-, and policy-level covariates (see the paper for variable descriptions).
