@@ -36,8 +36,8 @@ The `code` directory contains all scripts needed to prepare the TCI data, fit th
    Computes standard errors for GLM parameters via a parametric bootstrap.
 
 ### `data (synthetic)`
-The `data (synthetic)` directory provides a synthetic TCI dataset with 250,000 trade connections. It preserves the schema (column names) of the cleaned real TCI data and loosely mimics selected summary characteristics. The synthetic data are generated entirely independently and contain no records from the real dataset, thereby avoiding any disclosure of business-sensitive information.  
-Because the authors are bound by a non-disclosure agreement (NDA), the actual TCI data cannot be publicly released. The synthetic dataset is intended to help readers understand the data structure and to run the provided code end-to-end.
+The `data (synthetic)` directory provides a synthetic TCI dataset with 250,000 trade connections. It preserves the schema (column names) of the de-identified and cleaned real TCI data and loosely mimics selected summary characteristics. The synthetic data are generated entirely independently and contain no records from the real dataset, thereby avoiding any disclosure of business-sensitive information.  
+Because the authors are bound by a non-disclosure agreement (NDA), the actual TCI data cannot be publicly released (even in de-identified form). The synthetic dataset is intended to help readers understand the data structure and to run the provided code end-to-end.
 
 This directory contains:
 
